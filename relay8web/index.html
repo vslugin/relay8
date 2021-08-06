@@ -1,0 +1,31 @@
+<!DOCTYPE html><html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f8f8ff">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="RELAY8">
+    <title>RELAY8</title>
+    <style>html{font-family:Helvetica;display:inline-block;margin:0px auto;text-align:center;}
+    body{margin-top:50px;background-color:ghostwhite;overscroll-behavior:contain;}
+    .b{display:block;height:160px;width:160px;background-color:lightblue;border:none;color:whitesmoke;
+        text-decoration:none;font-size: 50px;margin:0px auto 25px;cursor:pointer;border-radius: 10px;}
+    </style></head>
+<body>
+<div id="app">
+</div>
+<script>let st;const c=new AbortController();const tId=setTimeout(()=>c.abort(),2000)
+async function r(){
+    try {
+        st = await (await fetch('/st',{signal:c.signal})).json();clearTimeout(tId);let m='';
+        document.querySelector('#app').innerHTML = '';
+        for (let i=0;i<st.length;i++) {
+            const eSt=st[i]==='1';const t=eSt?'/'+(i+1)+'\\':'\\'+(i+1)+'/';const eSt_=eSt?'d':'e'
+            document.querySelector('#app').insertAdjacentHTML('beforeEnd',`<button id="b${i}" class="b">${t}</button><br />`);
+            const cb=()=>{fetch(`/r${i+1}${eSt_}`).then(()=>{r()})}
+            document.getElementById(`b${i}`).removeEventListener('click',cb)
+            document.getElementById(`b${i}`).addEventListener('click',cb)
+        }
+    } catch(e){
+        st='CONNECTION ERROR';document.querySelector('#app').innerHTML=st + e.toString();
+    }
+}
+(async()=>{await r()})()</script></body></html>

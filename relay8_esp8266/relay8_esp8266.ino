@@ -36,7 +36,7 @@ uint8_t LED8pin = 13;
 
 const byte RELAY_COUNT = 8;
 
-byte relays[8] = {
+byte relays[RELAY_COUNT] = {
   LED1pin,
   LED2pin,
   LED3pin,

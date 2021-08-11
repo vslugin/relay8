@@ -34,6 +34,8 @@ uint8_t LED6pin = 14;
 uint8_t LED7pin = 12;
 uint8_t LED8pin = 13;
 
+const byte RELAY_COUNT = 8;
+
 byte relays[8] = {
   LED1pin,
   LED2pin,
@@ -73,14 +75,9 @@ void loadState() {
 
 void initRelays() {
   loadState();
-  digitalWrite(relays[0], getRelayBit(0));
-  digitalWrite(relays[1], getRelayBit(1));
-  digitalWrite(relays[2], getRelayBit(2));
-  digitalWrite(relays[3], getRelayBit(3));
-  digitalWrite(relays[4], getRelayBit(4));
-  digitalWrite(relays[5], getRelayBit(5));
-  digitalWrite(relays[6], getRelayBit(6));
-  digitalWrite(relays[7], getRelayBit(7));
+  for (int idx = 0; idx < RELAY_COUNT; ++idx) {
+    digitalWrite(relays[idx], getRelayBit(idx));
+  }
 }
 
 void toggleAndSave(int ri, bool value) {
@@ -93,14 +90,9 @@ void setup()
 {
   Serial.begin(115200);
   EEPROM.begin(512);
-  pinMode(LED1pin, OUTPUT);
-  pinMode(LED2pin, OUTPUT);
-  pinMode(LED3pin, OUTPUT);
-  pinMode(LED4pin, OUTPUT);
-  pinMode(LED5pin, OUTPUT);
-  pinMode(LED6pin, OUTPUT);
-  pinMode(LED7pin, OUTPUT);
-  pinMode(LED8pin, OUTPUT);
+  for (int idx = 0; idx < RELAY_COUNT; ++idx) {
+    pinMode(relays[idx], OUTPUT);
+  }
 
   // delay(10);
   initRelays();

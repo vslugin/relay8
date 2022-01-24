@@ -246,6 +246,14 @@ void loop(void) {
         http_get(RELAY8_URL + "/r6d");
         http_get(RELAY8_URL + "/r7d");
         http_get(RELAY8_URL + "/r8d");
+        r1 = false;
+        r2 = false;
+        r3 = false;
+        r4 = false;
+        r5 = false;
+        r6 = false;
+        r7 = false;
+        r8 = false;
         counter1 = 1;
         break;
 
@@ -260,6 +268,14 @@ void loop(void) {
         http_get(RELAY8_URL + "/r6e");
         http_get(RELAY8_URL + "/r7e");
         http_get(RELAY8_URL + "/r8e");
+        r1 = true;
+        r2 = true;
+        r3 = true;
+        r4 = true;
+        r5 = true;
+        r6 = true;
+        r7 = true;
+        r8 = true;
         counter1 = 1;
         break;
     }
